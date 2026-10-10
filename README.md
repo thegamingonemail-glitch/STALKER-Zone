@@ -1,34 +1,23 @@
-# STALKER-Zone
-Gesamtüberblick über das, was wir für deine S.T.A.L.K.E.R.-Mod bisher aufgebaut haben:
+# STALKER Zone (NeoForge 1.21.1)
 
-1. Dimension & Generation
-Dimension (stalker_zone:the_zone): Eigene S.T.A.L.K.E.R.-Dimension ist registriert, speichert mit der Welt und lässt sich per Teleport betreten.
+First step: one anomaly block (Electro Anomaly) that hurts everything standing inside it.
 
-Prozeduraler ZoneSpawner: Läuft beim Laden neuer Chunks auf dem Server und platziert mit definierter Chance dynamisch Zonen-Ereignisse und Anomalien.
+## Start it
+1. Install JDK 21 (e.g. Temurin 21) and an IDE (IntelliJ IDEA Community is easiest).
+2. Open this folder as a Gradle project in IntelliJ and wait for the sync to finish (first time takes a few minutes).
+3. Run the `runClient` Gradle task (Gradle panel -> Tasks -> modding -> runClient).
+4. In-game: Creative mode -> tab "STALKER Zone" -> place the Electro Anomaly and walk into it.
 
-2. Anomalien & Artefakte
-Flexibles AnomalyBlock-System: Einziges Block-System für alle Zonen-Anomalien inklusive optischer Partikel (Client-Side), Schadenseffekte und automatischem Artefakt-Spawning per Random Ticks.
+## Build a jar for your normal Minecraft
+Run `gradlew build` -> jar is in `build/libs/`. Put it in your `mods` folder (Minecraft 1.21.1 + NeoForge 21.1.x).
 
-4 Haupt-Anomalien:
+## Files
+- `StalkerZone.java`: registers block, item and creative tab
+- `AnomalyBlock.java`: the damage and spark particles
+- `src/main/resources/...`: textures, models, language files, loot table
 
-Electro: Stromschaden & spuckt Moonlight aus.
+## If something does not compile
+Copy the exact error message and send it to Claude together with the file name.
 
-Fire: Hitzeschaden/Feuer & spuckt Fireball aus.
-
-Gravity: Schleudert den Spieler hoch & spuckt Gravi aus.
-
-Acid: Säureschaden + Gift & spuckt Slime aus.
-
-3. S.T.A.L.K.E.R. Überlebenssystem (Player Stats)
-Custom Stats Framework: Verfolgt Strahlung (mSv), Blutung (Stufe 0–3), Ausdauer (Stamina) und Durst.
-
-NeoForge Attachments (ModAttachments): Binde die Zonen-Stats direkt an den Spieler inkl. NBT-Speicherung und Erhalt beim Tod (copyOnDeath).
-
-Survival Game Loop (StalkerSurvivalEvents): Server-Tick verarbeitet sekündlich Blutungsverlust, Strahlungsvergiftung sowie passiven Strahlungsabbau.
-
-4. Items & Ausrüstung
-Radioaktiver Müll (radioactive_waste): Block-Gefahrenquelle für die Umgebung.
-
-Geigerzähler (geiger_counter): Werkzeug zur Strahlungsmessung.
-
-Artefakte & Creative Tab: Eigener Mod-Tab im Kreativinventar für bequemen Zugriff auf alle Zonen-Objekte.
+## Next ideas
+Radiation (damage over time + Geiger sound), more anomaly types, artifacts as drops, an emission event.
